@@ -9,18 +9,20 @@ const newFormButton = document.querySelector("#new-form-btn")
 
 const myLibrary = [];
 
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-}
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
 
-Book.prototype.changeStatus = function() {
-    if (this.readStatus === true) {
-        this.readStatus = false
-    } else {
-        this.readStatus = true
+    changeStatus() {
+        if (this.readStatus === true) {
+            this.readStatus = false
+        } else {
+            this.readStatus = true
+        }
     }
 }
 
@@ -36,17 +38,15 @@ function render() {
     myLibrary.forEach((book) => {
         let newRow = document.createElement("tr")
         for (let key in book) {
-            if (book.hasOwnProperty(key)) {
-                let newCell = document.createElement("td")
-                if (book[key] === true) {
-                    newCell.textContent = "Read"
-                } else if (book[key] === false) {
-                    newCell.textContent = "Not Read"
-                } else {
-                    newCell.textContent = book[key]
-                }
-                newRow.appendChild(newCell)
+            let newCell = document.createElement("td")
+            if (book[key] === true) {
+                newCell.textContent = "Read"
+            } else if (book[key] === false) {
+                newCell.textContent = "Not Read"
+            } else {
+                newCell.textContent = book[key]
             }
+            newRow.appendChild(newCell)
         }
         let emptyCell = document.createElement("td")
         let deleteButton = document.createElement("button")
